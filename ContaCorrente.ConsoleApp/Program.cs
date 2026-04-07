@@ -18,8 +18,8 @@ class Program
         contaDois.limiteDebito = 1200;
 
         TelaPrincipal tela = new TelaPrincipal();
-
         ContaCorrente contaAcessada = contaUm;
+
         while (true)
         {
             string? opcaoMenu = tela.ApresentarOpcoesMenu(contaAcessada);
