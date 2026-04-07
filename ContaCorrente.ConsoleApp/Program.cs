@@ -7,13 +7,16 @@ class Program
         //Conta Corrente 1
         ContaCorrente contaUm = new ContaCorrente();
         contaUm.numeroIdentificacao = 1;
-        contaUm.titular = "Julia";
+        contaUm.titular = "Júlia";
+        contaUm.saldo = 400;
+        contaUm.limiteDebito = 1200;
 
         //Conta Corrente 2
         ContaCorrente contaDois = new ContaCorrente();
         contaUm.numeroIdentificacao = 2;
         contaDois.saldo = 12000;
-        contaDois.titular = "Tiago";
+        contaDois.titular = "Natália";
+        contaDois.limiteDebito = 1200;
 
         while (true)
         {
@@ -33,19 +36,74 @@ class Program
 
             if (opcaoMenu == "1")
             {
-                contaUm.Sacar();
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Digite o valor que deseja sacar (R$): ");
+                decimal valorSaque = Convert.ToDecimal(Console.ReadLine());
+
+                bool conseguiuSacar = contaUm.Sacar(valorSaque);
+
+                if (!conseguiuSacar)
+                {
+                    Console.WriteLine("-------------------------------------");
+                    Console.WriteLine("O valor do limite de débito já foi ultrapassado");
+                }
+
+                else
+                {
+                    Console.WriteLine("-------------------------------------");
+                    Console.WriteLine("O valor foi sacado com sucesso");
+                }
+
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Digite ENTER para continuar...");
+                Console.ReadLine();
             }
             else if (opcaoMenu == "2")
             {
-                contaUm.Depositar();
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Digite o valor que deseja depositar ()R$: ");
+                decimal valorDeposito = Convert.ToDecimal(Console.ReadLine());
+
+                contaUm.Depositar(valorDeposito);
+
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("O valor foi depositado com sucesso!");
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Digite ENTER para continuar...");
+                Console.ReadLine();
             }
             else if (opcaoMenu == "3")
             {
-                contaUm.TransferirPara(contaDois);
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Digite o valor que deseja transferir (R$): ");
+                decimal valorTransferencia = Convert.ToDecimal(Console.ReadLine());
+
+                bool conseguiurTransferir = contaUm.TransferirPara(contaDois, valorTransferencia);
+
+                if (!conseguiurTransferir)
+                {
+                    Console.WriteLine("-------------------------------------");
+                    Console.WriteLine($"Não foi possível transferir o valor de R${valorTransferencia} foi transferido com sucesso!");
+                }
+                else
+                {
+                    Console.WriteLine("-------------------------------------");
+                    Console.WriteLine($"O valor de R${valorTransferencia} foi transferido com sucesso!");
+                }
+
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Digite ENTER para continuar...");
+                Console.ReadLine();
             }
             else if (opcaoMenu == "4")
             {
-                contaUm.ObterSaldo();
+                decimal saldo = contaUm.ObterSaldo();
+
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine($"O valor do saldo da conta é (R$): {saldo}");
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Digite ENTER para continuar...");
+                Console.ReadLine();
             }
         }
     }
