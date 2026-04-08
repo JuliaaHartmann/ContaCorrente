@@ -68,7 +68,7 @@ class TelaPrincipal
     public void ApresentarOperacaoDeposito(ContaCorrente contaAcessada)
     {
         Console.WriteLine("-------------------------------------");
-        Console.Write("Digite o valor que deseja depositar ()R$: ");
+        Console.Write("Digite o valor que deseja depositar (R$): ");
         decimal valorDeposito = Convert.ToDecimal(Console.ReadLine());
 
         contaAcessada.Depositar(valorDeposito);
